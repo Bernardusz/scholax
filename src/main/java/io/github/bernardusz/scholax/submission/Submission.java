@@ -1,3 +1,8 @@
 package io.github.bernardusz.scholax.submission;
 
-public class Submission {}
+public record Submission(
+  Long id,
+  Long userId,
+  Long assignmentId,
+  Long submittedAt
+){}

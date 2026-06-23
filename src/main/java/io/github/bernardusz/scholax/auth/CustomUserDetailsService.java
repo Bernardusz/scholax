@@ -1,5 +1,6 @@
-package io.github.bernardusz.scholax.user;
+package io.github.bernardusz.scholax.auth;
 
+import io.github.bernardusz.scholax.user.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

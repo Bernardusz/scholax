@@ -22,15 +22,7 @@ public class UserRepository {
                 WHERE email = :email
             """)
         .param("email", email)
-        .query(
-            (rs, rowNum) ->
-                new User(
-                    rs.getLong("id"),
-                    rs.getString("email"),
-                    rs.getString("password"),
-                    rs.getString("full_name"),
-                    rs.getString("role"),
-                    rs.getTimestamp("created_at").toLocalDateTime()))
+        .query(User.class)
         .optional()
         .map(SecurityUser::new) // If found, wrap our custom record into SecurityUser
         .orElseThrow(() -> new UsernameNotFoundException("No user found with email: " + email));
