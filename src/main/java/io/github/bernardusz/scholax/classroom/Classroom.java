@@ -1,4 +1,9 @@
 package io.github.bernardusz.scholax.classroom;
 
-public class Classroom  {
-}
+public record Classroom(
+  Long id,
+  String name,
+  String inviteCode,
+  Long classroomCoverId,
+  Long createdAt
+){ }

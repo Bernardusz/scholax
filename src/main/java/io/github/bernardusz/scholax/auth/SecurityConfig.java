@@ -18,13 +18,13 @@ public class SecurityConfig {
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http
       .authorizeHttpRequests(
-      authorize ->
-        authorize
-          .requestMatchers("/login").permitAll()
-          .requestMatchers("/css/**", "/js/**", "/images/**").permitAll() // Let assets pass through
-          .requestMatchers("/teacher/**").hasRole("TEACHER") // Every teacher route will be left to teachers alone
-          .requestMatchers("/student/**").hasRole("STUDENT") // Explicit Student Isolation
-          .anyRequest().authenticated() // While every other path is shared
+        authorize ->
+          authorize
+            .requestMatchers("/login").permitAll()
+            .requestMatchers("/css/**", "/js/**", "/images/**").permitAll() // Let assets pass through
+            .requestMatchers("/teacher/**").hasRole("TEACHER") // Every teacher route will be left to teachers alone
+            .requestMatchers("/student/**").hasRole("STUDENT") // Explicit Student Isolation
+            .anyRequest().authenticated() // While every other path is shared
       )
       .formLogin(formLogin -> formLogin
         .loginPage("/login")
