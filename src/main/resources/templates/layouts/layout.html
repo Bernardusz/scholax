@@ -1,0 +1,53 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+			rel="stylesheet"
+		/>
+
+		<link rel="stylesheet" th:href="@{/css/output.css}" />
+
+		<title>Scholax</title>
+	</head>
+	<body class="font-sans bg-gray-50 text-gray-900 min-h-screen flex flex-col">
+    <header class="flex flex-row w-full justify-between items-center p-4 bg-white border-b border-gray-100 shadow-sm"
+            xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+        <div class="font-bold text-xl text-blue-600">Scholax</div>
+
+        <div class="flex items-center gap-3" sec:authorize="isAuthenticated()">
+
+        <span class="text-sm font-medium"
+              th:with="fullName=${#authentication.principal.fullName},
+                       firstName=${fullName.contains(' ') ? fullName.substring(0, fullName.indexOf(' ')) : fullName}">
+            Hello, <a th:href="@{/users/{id}(id=${#authentication.principal.id})}" th:text="${firstName}">User</a>! 👋
+        </span>
+
+            <div class="w-9 h-9 rounded-full overflow-hidden border border-gray-200 transition-transform duration-200 hover:scale-105 cursor-pointer">
+                <img th:with="picId=${#authentication.principal.profilePictureId}"
+                     th:src="${picId != null ? '/uploads/' + picId : '/images/default-avatar.png'}"
+                     class="w-full h-full object-cover"
+                     alt="Profile Picture"/>
+            </div>
+
+        </div>
+    </header>
+
+		<main layout:fragment="content" class="page">
+			<p>Default content placeholder</p>
+		</main>
+
+		<footer
+			class="p-4 border-t text-center text-xs text-gray-400"
+		>
+			<p>© 2026 Scholax LMS. All rights reserved.</p>
+		</footer>
+	</body>
+</html>

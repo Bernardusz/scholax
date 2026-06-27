@@ -3,9 +3,11 @@
 -- ==========================================
 
 CREATE TABLE IF NOT EXISTS uploads (
-   id BIGSERIAL PRIMARY KEY,
-   url TEXT NOT NULL,
-   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    id BIGSERIAL PRIMARY KEY,
+    file_name VARCHAR(255) NOT NULL,
+    url TEXT NOT NULL,
+    google_file_id VARCHAR(100) UNIQUE, -- Saves database index space compared to indexing full URLs
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS users (
@@ -13,10 +15,10 @@ CREATE TABLE IF NOT EXISTS users (
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     full_name VARCHAR(255) NOT NULL,
-    role VARCHAR(50) NOT NULL, -- Restricted length for memory compaction
+    role VARCHAR(50) NOT NULL CHECK (role IN ('STUDENT', 'TEACHER', 'ADMIN')),
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    profile_picture BIGINT,
-    FOREIGN KEY (profile_picture) REFERENCES uploads(id) ON DELETE SET NULL
+    profile_picture_id BIGINT,
+    FOREIGN KEY (profile_picture_id) REFERENCES uploads(id) ON DELETE SET NULL
 );
 
 -- ==========================================
