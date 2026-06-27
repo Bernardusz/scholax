@@ -1,0 +1,12 @@
+# .github/labeler.yml
+
+# Adds the 'frontend' label if Thymeleaf templates or CSS change
+frontend:
+  - changed-files:
+      - any-glob-to-any-file: 'src/main/resources/templates/**/*'
+      - any-glob-to-any-file: 'src/main/resources/static/**/*'
+      - any-glob-to-any-file: 'src/main/resources/tailwind/**/*'
+# Adds the 'backend' label if Java classes change
+backend:
+  - changed-files:
+      - any-glob-to-any-file: 'src/main/java/**/*'
