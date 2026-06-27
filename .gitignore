@@ -35,3 +35,10 @@ build/
 ### Env
 .env
 personal-notes/
+
+# Block local front-end dependencies folder
+node_modules/
+
+# Block OS-specific system junk
+.DS_Store
+Thumbs.db

@@ -6,8 +6,6 @@ import io.github.bernardusz.scholax.shared.upload.dto.UploadCreation;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-
 @Service
 public class UploadService {
   private final UploadRepository uploadRepository;
@@ -22,8 +20,8 @@ public class UploadService {
   }
 
   @Transactional(readOnly = true)
-  public String findByUrlId(Long id) {
-    return uploadRepository.findByUrlId(id).orElseThrow(() -> new FileNotFound("File doesn't exist or isn't found"));
+  public String findUrlById(Long id) {
+    return uploadRepository.findUrlById(id).orElseThrow(() -> new FileNotFound("File doesn't exist or isn't found"));
   }
 
   @Transactional

@@ -1,0 +1,141 @@
+@import "tailwindcss";
+
+@theme inline {
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+
+	--color-muted: var(--muted);
+	--color-muted-foreground: var(--muted-foreground);
+
+	--color-accent: var(--accent);
+	--color-accent-foreground: var(--accent-foreground);
+
+	--color-destructive: var(--destructive);
+	--color-destructive-foreground: var(--destructive-foreground);
+
+	--color-card: var(--card);
+	--color-card-foreground: var(--card-foreground);
+
+	--color-popover: var(--popover);
+	--color-popover-foreground: var(--popover-foreground);
+
+	--color-border: var(--border);
+
+	--font-main: "Inter";
+
+	--color-primary: var(--primary);
+	--color-primary-foreground: var(--primary-foreground);
+
+	--color-secondary: var(--secondary);
+	--color-secondary-foreground: var(--secondary-foreground);
+
+	--color-tertiary: var(--tertiary);
+	--color-tertiary-foreground: var(--tertiary-foreground);
+}
+
+:root {
+	color-scheme: light;
+
+	--radius: 0.625rem;
+	--background: hsl(231, 99%, 95%);
+	--foreground: hsl(231, 99%, 5%);
+	--card: hsl(231, 10%, 95%);
+	--card-foreground: hsl(231, 10%, 5%);
+	--popover: hsl(231, 99%, 90%);
+	--popover-foreground: hsl(231, 99%, 10%);
+	--primary: hsl(231, 99%, 62%);
+	--primary-foreground: hsl(231, 99%, 95%);
+	--secondary: hsl(16, 100%, 66%);
+	--secondary-foreground: hsl(16, 100%, 5%);
+	--tertiary: hsl(145, 100%, 39%);
+	--tertiary-foreground: hsl(145, 100%, 95%);
+	--muted: hsl(231, 99%, 90%);
+	--muted-foreground: hsl(231, 99%, 10%);
+	--accent: hsl(231, 99%, 85%);
+	--accent-foreground: hsl(231, 99%, 15%);
+	--destructive: hsl(357, 100%, 45%);
+	--destructive-foreground: hsl(357, 100%, 95%);
+	--border: hsl(231, 99%, 62%);
+}
+
+:root.dark {
+	color-scheme: dark;
+
+	--background: hsl(231, 99%, 5%);
+	--foreground: hsl(231, 99%, 95%);
+	--card: hsl(231, 10%, 95%);
+	--card-foreground: hsl(231, 99%, 95%);
+	--popover: hsl(231, 99%, 10%);
+	--popover-foreground: hsl(231, 99%, 90%);
+	--primary: hsl(231, 99%, 62%);
+	--primary-foreground: hsl(231, 99%, 95%);
+	--secondary: hsl(16, 100%, 66%);
+	--secondary-foreground: hsl(16, 100%, 5%);
+	--tertiary: hsl(145, 100%, 39%);
+	--tertiary-foreground: hsl(145, 100%, 95%);
+	--muted: hsl(231, 99%, 10%);
+	--muted-foreground: hsl(231, 99%, 90%);
+	--accent: hsl(231, 99%, 15%);
+	--accent-foreground: hsl(231, 99%, 95%);
+	--destructive: hsl(357, 100%, 45%);
+	--destructive-foreground: hsl(357, 100%, 95%);
+	--border: hsl(231, 99%, 62%);
+}
+
+@layer base {
+	* {
+		@apply font-main;
+	}
+	body {
+		@apply bg-background text-foreground;
+	}
+	h1 {
+		@apply text-4xl font-bold;
+	}
+	h2 {
+		@apply text-2xl font-bold;
+	}
+	h3 {
+		@apply text-xl font-semibold;
+	}
+	h4 {
+		@apply text-lg font-semibold;
+	}
+	p {
+		@apply text-base font-normal;
+	}
+	input,
+	textarea {
+		@apply px-2;
+	}
+}
+
+@layer components {
+	.page {
+		@apply flex h-fit w-full xl:overflow-visible overflow-hidden flex-col items-center justify-center pt-4 xl:pt-10 gap-8;
+	}
+	.p-deemphasize {
+		@apply text-sm font-normal;
+	}
+	.link-primary {
+		@apply text-primary hover:text-primary/90 font-medium;
+	}
+	.btn-primary {
+		@apply min-h-8 bg-primary text-primary-foreground min-w-24 hover:scale-105 transition-transform duration-300 p-2 text-center;
+	}
+	.section {
+		@apply max-w-400 px-4 py-6 md:px-8 md:py-12 xl:px-12 xl:py-16 relative w-full;
+	}
+	.hover-transform {
+		@apply transition-transform duration-300 hover:shadow-2xl motion-safe:hover:scale-105;
+	}
+	.link-btn {
+		@apply bg-primary text-primary-foreground min-w-24 hover:scale-105 transition-transform duration-300 p-2 text-center;
+	}
+	.btn-secondary {
+		@apply bg-secondary text-secondary-foreground min-w-24 hover:scale-105 transition-transform duration-300 p-2 text-center;
+	}
+	.btn-destructive {
+		@apply bg-destructive text-destructive-foreground min-w-24 hover:scale-105 transition-transform duration-300 p-2 text-center;
+	}
+}

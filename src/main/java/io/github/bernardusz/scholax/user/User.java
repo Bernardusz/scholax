@@ -7,6 +7,7 @@ public record User(
   String email,
   String password, // Stores the encrypted BCrypt hash
   String fullName,
-  String role,     // 'STUDENT', 'TEACHER', or 'ADMIN'
-  LocalDateTime createdAt
+  UserRole role,     // 'STUDENT', 'TEACHER', ADMIN
+  LocalDateTime createdAt,
+  Long profilePictureId
 ) {}

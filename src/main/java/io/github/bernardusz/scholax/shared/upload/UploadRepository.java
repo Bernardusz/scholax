@@ -32,7 +32,7 @@ public class UploadRepository {
       .optional();
   }
 
-  public Optional<String> findByUrlId(Long id){
+  public Optional<String> findUrlById(Long id){
     return jdbcClient.sql("SELECT url FROM uploads WHERE id = :id")
       .param("id", id)
       .query(String.class)

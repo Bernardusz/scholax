@@ -1,4 +1,4 @@
-package io.github.bernardusz.scholax.config;
+package io.github.bernardusz.scholax.auth;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,9 +22,11 @@ public class SecurityConfig {
           authorize
             .requestMatchers("/login").permitAll()
             .requestMatchers("/css/**", "/js/**", "/images/**").permitAll() // Let assets pass through
-            .requestMatchers("/teacher/**").hasRole("TEACHER") // Every teacher route will be left to teachers alone
-            .requestMatchers("/student/**").hasRole("STUDENT") // Explicit Student Isolation
-            .anyRequest().authenticated() // While every other path is shared
+            .requestMatchers("/teachers/**").hasRole("TEACHER") // Every teachers route will be left to teachers alone
+            .requestMatchers("/students/**").hasRole("STUDENT") // Explicit Student Isolation
+            .requestMatchers("/admins/**").hasRole("ADMIN") // Explicit Admin Isolation
+            .requestMatchers("/register").hasRole("ADMIN") // Only admin can register users
+            .anyRequest().authenticated() // While every other path is protected
       )
       .formLogin(formLogin -> formLogin
         .loginPage("/login")

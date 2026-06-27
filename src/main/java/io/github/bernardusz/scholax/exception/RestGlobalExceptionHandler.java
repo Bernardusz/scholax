@@ -8,10 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.util.Map;
 
 @RestControllerAdvice
-public class AjaxGlobalExceptionHandler {
+public class RestGlobalExceptionHandler {
 
   @ExceptionHandler(FailedUploadingFiles.class)
   public ResponseEntity<ErrorResponse> handleFailedUploadingFiles(FailedUploadingFiles ex) {
