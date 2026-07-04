@@ -74,8 +74,8 @@ public class UserRepository {
       SELECT id, full_name, role, profile_picture_id
       FROM users
       WHERE 
-        (:search IS NULL OR full_name ILIKE :search OR email ILIKE :search)
-        AND (:role IS NULL OR role = :role)
+        (:search::text IS NULL OR full_name::text ILIKE :search OR email::text ILIKE :search)
+        AND (:role::text IS NULL OR role = :role::text)
       ORDER BY created_at DESC
       LIMIT :limit OFFSET :offset
       """
@@ -97,7 +97,7 @@ public class UserRepository {
         u.profile_picture_id,
       FROM users u
       INNER JOIN classroom_users cu ON u.id = cu.user_id
-      where cu.classroom_id = :classroomId
+      WHERE cu.classroom_id = :classroomId
       """
     ).param("classroomId", classroomId)
       .query(UserSummary.class)

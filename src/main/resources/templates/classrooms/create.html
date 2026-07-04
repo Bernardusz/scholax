@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layouts/layout}"
+>
+<head>
+</head>
+<main layout:fragment="content" class="flex flex-col items-center justify-center">
+    <section class="section flex flex-col items-center justify-center">
+        <div class="w-full max-w-md p-8 rounded-2xl bg-card text-card-foreground border border-border shadow-md">
+            <div class="text-left">
+                <h2>Create New Classroom</h2>
+                <p class="p-deemphasize text-muted-foreground mt-1">Set up a new learning space 📚</p>
+            </div>
+
+            <form th:action="@{/classrooms/create}" th:object="${classroom}" method="POST" class="flex flex-col gap-4">
+                <div class="flex flex-col gap-1">
+                    <label for="name" class="text-sm font-medium">Classroom Name</label>
+                    <input type="text" id="name" th:field="*{name}" required
+                           class="h-10 bg-background border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/40" />
+                </div>
+
+                <button type="submit" class="btn-primary w-full rounded-md mt-2 font-semibold">
+                    Create Classroom
+                </button>
+            </form>
+
+            <div class="text-center mt-6 text-sm">
+                <a th:href="@{/classrooms}" class="link-primary">Back to Classrooms</a>
+            </div>
+        </div>
+    </section>
+</main>
+</html>

@@ -1,6 +1,7 @@
 package io.github.bernardusz.scholax.exception;
 
 import io.github.bernardusz.scholax.exception.dto.ErrorResponse;
+import io.github.bernardusz.scholax.exception.exceptions.FailedAddingUser;
 import io.github.bernardusz.scholax.exception.exceptions.FailedUploadingFiles;
 import io.github.bernardusz.scholax.exception.exceptions.FileNotFound;
 import org.springframework.http.HttpStatus;
@@ -30,5 +31,14 @@ public class RestGlobalExceptionHandler {
         LocalDateTime.now()
       )
     );
+  }
+
+  @ExceptionHandler(FailedAddingUser.class)
+  public ResponseEntity<ErrorResponse> handleFailedAddingUser(FailedAddingUser ex){
+    return ResponseEntity.internalServerError().body(new ErrorResponse(
+      ex.getErrorCode(),
+      ex.getMessage(),
+      LocalDateTime.now()
+    ));
   }
 }

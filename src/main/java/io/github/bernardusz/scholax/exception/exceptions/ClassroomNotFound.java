@@ -1,11 +1,10 @@
 package io.github.bernardusz.scholax.exception.exceptions;
 
-public class FailedUploadingFiles extends RuntimeException {
+public class ClassroomNotFound extends RuntimeException {
   private final int errorCode;
-
-  public FailedUploadingFiles(String message) {
+  public ClassroomNotFound(String message) {
     super(message);
-    this.errorCode = 500;
+    this.errorCode = 404;
   }
   public int getErrorCode(){
     return errorCode;
