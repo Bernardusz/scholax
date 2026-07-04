@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS classrooms (
     id BIGSERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
-    invite_code VARCHAR(6) NOT NULL UNIQUE, -- Alphanumeric join token (e.g., 'X7Y2Z1')
+    invite_code VARCHAR(10) NOT NULL UNIQUE, -- Alphanumeric join token (e.g., 'X7Y2Z1')
     classroom_cover_id BIGINT,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (classroom_cover_id) REFERENCES uploads(id) ON DELETE SET NULL

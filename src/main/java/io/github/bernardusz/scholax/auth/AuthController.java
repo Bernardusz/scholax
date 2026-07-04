@@ -32,7 +32,7 @@ public class AuthController {
   public String registerUser(@ModelAttribute("users") UserRegister registerDto, Model model) {
     if (userService.existsByEmail(registerDto.email())) {
       model.addAttribute("error", "Email is already registered!");
-      return "register";
+      return "auth/register";
     }
 
     // Convert DTO to domain object while hashing the password
