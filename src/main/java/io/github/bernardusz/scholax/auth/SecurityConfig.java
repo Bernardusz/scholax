@@ -20,7 +20,7 @@ public class SecurityConfig {
       .authorizeHttpRequests(
         authorize ->
           authorize
-            .requestMatchers("/login").permitAll()
+            .requestMatchers("/login", "/admins/users/create").permitAll()
             .requestMatchers("/css/**", "/js/**", "/images/**").permitAll() // Let assets pass through
             .requestMatchers("/teachers/**").hasRole("TEACHER") // Every teachers route will be left to teachers alone
             .requestMatchers("/students/**").hasRole("STUDENT") // Explicit Student Isolation

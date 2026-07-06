@@ -101,7 +101,8 @@ CREATE TABLE IF NOT EXISTS announcements (
     content TEXT NOT NULL,
     classroom_id BIGINT NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-)
+    FOREIGN KEY (classroom_id) REFERENCES classrooms(id) ON DELETE CASCADE
+);
 
 CREATE TABLE IF NOT EXISTS announcement_uploads (
     announcement_id BIGINT NOT NULL,
@@ -109,4 +110,4 @@ CREATE TABLE IF NOT EXISTS announcement_uploads (
     PRIMARY KEY (announcement_id, upload_id),
     FOREIGN KEY (announcement_id) REFERENCES announcements(id) ON DELETE CASCADE,
     FOREIGN KEY (upload_id) REFERENCES uploads(id) ON DELETE CASCADE
-)
+);
