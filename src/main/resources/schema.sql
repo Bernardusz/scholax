@@ -54,6 +54,7 @@ CREATE TABLE IF NOT EXISTS assignments (
     description TEXT NOT NULL,
     classroom_id BIGINT NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    due_date TIMESTAMP NOT NULL,
     FOREIGN KEY (classroom_id) REFERENCES classrooms(id) ON DELETE CASCADE
 );
 
@@ -74,6 +75,7 @@ CREATE TABLE IF NOT EXISTS submissions (
     user_id BIGINT NOT NULL,
     assignment_id BIGINT NOT NULL,
     submitted_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    status VARCHAR(50) NOT NULL CHECK (status IN ('PENDING', 'LATE', 'SUBMITTED', 'GRADED')),
 
     CONSTRAINT unique_student_assignment UNIQUE (user_id, assignment_id),
 
@@ -86,5 +88,26 @@ CREATE TABLE IF NOT EXISTS submission_uploads (
     upload_id BIGINT NOT NULL,
     PRIMARY KEY (submission_id, upload_id),
     FOREIGN KEY (submission_id) REFERENCES submissions(id) ON DELETE CASCADE,
+    FOREIGN KEY (upload_id) REFERENCES uploads(id) ON DELETE CASCADE
+);
+
+-- ==========================================
+-- 5. ANNOUNCEMENT TABLES
+-- ==========================================
+
+CREATE TABLE IF NOT EXISTS announcements (
+    id BIGSERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    content TEXT NOT NULL,
+    classroom_id BIGINT NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (classroom_id) REFERENCES classrooms(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS announcement_uploads (
+    announcement_id BIGINT NOT NULL,
+    upload_id BIGINT NOT NULL,
+    PRIMARY KEY (announcement_id, upload_id),
+    FOREIGN KEY (announcement_id) REFERENCES announcements(id) ON DELETE CASCADE,
     FOREIGN KEY (upload_id) REFERENCES uploads(id) ON DELETE CASCADE
 );
