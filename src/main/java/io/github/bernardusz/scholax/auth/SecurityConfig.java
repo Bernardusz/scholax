@@ -20,12 +20,11 @@ public class SecurityConfig {
       .authorizeHttpRequests(
         authorize ->
           authorize
-            .requestMatchers("/login").permitAll()
+            .requestMatchers("/login", "/admins/users/create").permitAll()
             .requestMatchers("/css/**", "/js/**", "/images/**").permitAll() // Let assets pass through
             .requestMatchers("/teachers/**").hasRole("TEACHER") // Every teachers route will be left to teachers alone
             .requestMatchers("/students/**").hasRole("STUDENT") // Explicit Student Isolation
             .requestMatchers("/admins/**").hasRole("ADMIN") // Explicit Admin Isolation
-            .requestMatchers("/register").hasRole("ADMIN") // Only admin can register users
             .anyRequest().authenticated() // While every other path is protected
       )
       .formLogin(formLogin -> formLogin

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layouts/layout}"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+</head>
+<main layout:fragment="content" class="flex flex-col items-center justify-center p-6">
+    <section class="w-full max-w-4xl">
+        <div class="flex justify-between items-center mb-6">
+            <div>
+                <h2>Classrooms</h2>
+                <p class="p-deemphasize text-muted-foreground mt-1">Your learning spaces 🎓</p>
+            </div>
+            <a th:href="@{/classrooms/create}" 
+               sec:authorize="hasRole('ADMIN')"
+               class="btn-primary px-4 py-2 rounded-md font-semibold">
+                + Create Classroom
+            </a>
+        </div>
+
+        <div th:if="${classrooms == null or classrooms.isEmpty()}" class="text-center py-12">
+            <p class="text-muted-foreground">No classrooms found.</p>
+        </div>
+
+        <div th:if="${classrooms != null and !classrooms.isEmpty()}" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div th:each="classroom : ${classrooms}" 
+                 class="p-6 rounded-xl bg-card text-card-foreground border border-border shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+                <a th:href="@{/classrooms/{id}(id=${classroom.id})}" class="block">
+                    <div class="flex items-start justify-between">
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-lg" th:text="${classroom.name}">Classroom Name</h3>
+                        </div>
+                        <div th:if="${classroom.classroomCoverId != null}" 
+                             class="w-16 h-16 rounded-lg overflow-hidden border border-border">
+                            <img th:src="@{'/uploads/' + ${classroom.classroomCoverId}}" 
+                                 class="w-full h-full object-cover" 
+                                 alt="Classroom Cover"/>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+</main>
+</html>
